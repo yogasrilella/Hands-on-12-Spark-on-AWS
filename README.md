@@ -113,6 +113,7 @@ After the job (which may take 2-3 minutes to run), navigate to your `handsonfina
 * `s3://handsonfinalprocessed/Athena Results/daily_review_counts/`
 * `s3://handsonfinalprocessed/Athena Results/top_5_customers/`
 * `s3://handsonfinalprocessed/Athena Results/rating_distribution/`
+![Athena Results](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Athena%20Results.png)
 
 You will also find the complete, cleaned dataset in `s3://handsonfinalprocessed/processed-data/`.
 ![Processed Data](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Processed%20Data.png)
