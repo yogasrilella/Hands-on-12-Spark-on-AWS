@@ -89,6 +89,7 @@ The new Lambda role needs permission to start a Glue job.
 4.  Select your `handsonfinallanding` bucket.
 5.  Set the **Event type** to `s3:ObjectCreated:*` (or "All object create events").
 6.  Acknowledge the recursive invocation warning and click **Add**.
+![Trigger](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Trigger.png)
 
 ---
 
