@@ -101,18 +101,21 @@ Your pipeline is now fully deployed and automated!
 2.  Upload `reviews.csv` to the root of your `handsonfinallanding` S3 bucket.
 3.  This will trigger the Lambda, which in turn starts the Glue job.
 4.  You can monitor the job's progress in the **AWS Glue** console under the **Monitoring** tab.
+![Landing Folder](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Landing%20Folder.png)
 
 ---
 
 ## 📈 Query Results
 
 After the job (which may take 2-3 minutes to run), navigate to your `handsonfinalprocessed` bucket. You will find the results in the `Athena Results/` folder, organized into sub-folders for each query:
+![Processed Folder](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Processed%20Folder.png)
 
 * `s3://handsonfinalprocessed/Athena Results/daily_review_counts/`
 * `s3://handsonfinalprocessed/Athena Results/top_5_customers/`
 * `s3://handsonfinalprocessed/Athena Results/rating_distribution/`
 
 You will also find the complete, cleaned dataset in `s3://handsonfinalprocessed/processed-data/`.
+![Processed Data](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Processed%20Data.png)
 
 ---
 ## 🧹 Cleanup
