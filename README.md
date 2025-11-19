@@ -47,6 +47,7 @@ Your Glue job needs permission to read from and write to S3.
 8.  Save the job.
 
 > **Note:** The script is already configured to use the `handsonfinallanding` and `handsonfinalprocessed` buckets.
+![Glue Job](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Glue%20Job.png)
 
 ### 5. Create the Lambda Trigger Function
 This function will start the Glue job when a file is uploaded.
@@ -57,6 +58,7 @@ This function will start the Glue job when a file is uploaded.
 4.  Set the **Runtime** to **Python 3.10** (or any modern Python runtime).
 5.  **Permissions:** Under "Change default execution role," select **Create a new role with basic Lambda permissions**. This role will be automatically named.
 6.  Create the function.
+![Lambda Function](https://raw.githubusercontent.com/yogasrilella/Hands-on-12-Spark-on-AWS/main/Lambda%20Function.png)
 
 #### 5a. Add Lambda Code
 Paste the contents of `src/lambda_function.py` into the code editor. Make sure the `GLUE_JOB_NAME` variable matches the name of your Glue job (`process_reviews_job`).
