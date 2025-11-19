@@ -83,9 +83,64 @@ glueContext.write_dynamic_frame.from_options(
 )
 
 # Write the spark queries for following:
-# 2. Date wise review count: his query calculates the total number of reviews submitted per day.
-# 3. Top 5 Most Active Customers: This query identifies your "power users" by finding the customers who have submitted the most reviews.
-# 4. Overall Rating Distribution: This query shows the count for each star rating (1-star, 2-star, etc.)
+# 2. Date wise review count: total reviews per day
+df_datewise_review_count = spark.sql("""
+    SELECT
+        review_date,
+        COUNT(*) AS review_count
+    FROM product_reviews
+    GROUP BY review_date
+    ORDER BY review_date
+""")
+
+# (Optional) write to S3
+datewise_frame = DynamicFrame.fromDF(df_datewise_review_count.repartition(1), glueContext, "datewise_reviews")
+glueContext.write_dynamic_frame.from_options(
+    frame=datewise_frame,
+    connection_type="s3",
+    connection_options={"path": s3_analytics_path + "datewise-review-count/"},
+    format="csv"
+)
+
+# 3. Top 5 Most Active Customers: customers with the most reviews
+df_top_customers = spark.sql("""
+    SELECT
+        customer_id,
+        COUNT(*) AS review_count
+    FROM product_reviews
+    GROUP BY customer_id
+    ORDER BY review_count DESC
+    LIMIT 5
+""")
+
+# (Optional) write to S3
+top_customers_frame = DynamicFrame.fromDF(df_top_customers.repartition(1), glueContext, "top_customers")
+glueContext.write_dynamic_frame.from_options(
+    frame=top_customers_frame,
+    connection_type="s3",
+    connection_options={"path": s3_analytics_path + "top-5-customers/"},
+    format="csv"
+)
+
+# 4. Overall Rating Distribution: how many reviews for each rating value
+df_rating_distribution = spark.sql("""
+    SELECT
+        rating,
+        COUNT(*) AS review_count
+    FROM product_reviews
+    GROUP BY rating
+    ORDER BY rating
+""")
+
+# (Optional) write to S3
+rating_dist_frame = DynamicFrame.fromDF(df_rating_distribution.repartition(1), glueContext, "rating_distribution")
+glueContext.write_dynamic_frame.from_options(
+    frame=rating_dist_frame,
+    connection_type="s3",
+    connection_options={"path": s3_analytics_path + "rating-distribution/"},
+    format="csv"
+)
+
 
 
 job.commit()
